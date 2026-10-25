@@ -855,6 +855,7 @@ body.facts-hidden .fun-fact {
     box-shadow: 0 10px 0 rgba(22, 50, 79, 0.14);
     cursor: none;
     user-select: none;
+    touch-action: none;
 }
 
 #game-container.border-basic {

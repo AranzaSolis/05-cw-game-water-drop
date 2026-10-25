@@ -149,10 +149,17 @@ document.getElementById("store-play-again-button").addEventListener("click", () 
   startGame();
 });
 storeDialog.addEventListener("close", () => storeMessage.textContent = "");
+gameContainer.addEventListener("pointerdown", (event) => {
+  if (event.pointerType === "touch") {
+    gameContainer.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  }
+});
 gameContainer.addEventListener("pointermove", (event) => {
   const bounds = gameContainer.getBoundingClientRect();
   moveBucket(event.clientX - bounds.left);
   checkBucketCollisions();
+  if (event.pointerType === "touch") event.preventDefault();
 });
 volumeControl.addEventListener("input", () => {
   volumeLevel = Number(volumeControl.value) / 100;
