@@ -1350,19 +1350,36 @@ body.theme-night .score-feedback {
     }
 
     .score-panel {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 14px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 6px;
+        padding: 8px 6px;
     }
 
     .score,
     .timer {
-        flex: 1 1 35%;
+        flex: 0 1 auto;
         text-align: center;
+        font-size: 0.78rem;
     }
 
-    .start-button {
-        flex: 1 1 100%;
+    .score span,
+    .timer span {
+        font-size: 1.15rem;
+    }
+
+    .game-controls {
+        gap: 5px;
+    }
+
+    .timer {
+        left: 0;
+    }
+
+    .score-panel #restart-btn,
+    .score-panel #game-home-button {
+        padding: 6px 4px;
+        font-size: 0.68rem;
     }
 
     #game-container {
