@@ -54,20 +54,6 @@ body.theme-night .secondary-button {
     background: rgba(24, 53, 77, 0.95);
 }
 
-body.theme-night .fun-fact {
-    background: #fff9d6;
-    border-left-color: #ffc907;
-    color: #000000;
-}
-
-body.theme-night .fun-fact-label {
-    color: #123b54;
-}
-
-body.theme-night .fun-fact p {
-    color: #000000;
-}
-
 body.theme-night .start-button,
 body.theme-night .settings-button,
 body.theme-night .drop-total {
@@ -244,37 +230,6 @@ main {
     font-family: "Baloo 2", sans-serif;
     font-size: clamp(1.35rem, 3vw, 1.75rem);
     font-weight: 700;
-}
-
-.fun-fact {
-    position: relative;
-    top: 28px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: min(100%, 430px);
-    margin: 18px auto 0;
-    padding: 9px 14px;
-    color: var(--ink);
-    background: rgba(255, 253, 246, 0.72);
-    border-left: 4px solid var(--sun);
-    border-radius: 8px;
-    text-align: left;
-}
-
-.fun-fact-label {
-    flex: 0 0 auto;
-    color: var(--sky);
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-}
-
-.fun-fact p {
-    color: var(--muted-ink);
-    font-size: 0.78rem;
-    font-weight: 700;
-    line-height: 1.3;
 }
 
 .game-tagline {
@@ -766,10 +721,6 @@ input[type="range"] {
 .reset-button:hover {
     color: #ffffff;
     background: var(--coral);
-}
-
-body.facts-hidden .fun-fact {
-    display: none;
 }
 
 @keyframes canFloat {
@@ -1396,13 +1347,6 @@ body.theme-night .score-feedback {
         padding-right: 6px;
         padding-left: 6px;
         font-size: 0.7rem;
-    }
-
-    .fun-fact {
-        align-items: flex-start;
-        gap: 7px;
-        padding-right: 10px;
-        padding-left: 10px;
     }
 }
 

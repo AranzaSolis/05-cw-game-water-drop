@@ -5,7 +5,6 @@ let score = 0;
 let roundDropsCollected = 0;
 let totalDrops = Number(localStorage.getItem("totalDropsCollected") || 0);
 let bestScore = Number(localStorage.getItem("bestScore") || 0);
-let lastFunFactIndex = -1;
 let audioContext;
 let countdownMaker;
 let collisionChecker;
@@ -14,7 +13,6 @@ let backgroundMusicStep = 0;
 let timeRemaining = 35;
 let soundEnabled = localStorage.getItem("soundEnabled") !== "false";
 let volumeLevel = Number(localStorage.getItem("volumeLevel") || 70) / 100;
-let factsVisible = localStorage.getItem("factsVisible") !== "false";
 let gameStartTime = 0;
 let theme = localStorage.getItem("theme") || "sunny";
 let ownedStoreItems = JSON.parse(localStorage.getItem("ownedStoreItems") || '["bucket-jerry","border-basic"]');
@@ -29,16 +27,6 @@ let equippedBorder = localStorage.getItem("equippedBorder")
   || legacyBorderIds[localStorage.getItem("equippedBackground")]
   || "border-basic";
 
-const funFacts = [
-  "A nearby source of safe water can turn a daily trek into extra time for learning, earning, and family life.",
-  "Safe water and sanitation help communities prevent waterborne diseases.",
-  "Small drops of support can help bring lasting clean water solutions to communities.",
-  "100% of public donations fund clean water projects!",
-  "charity: water shares photos and GPS coordinates of its water projects so supporters can see where their contributions are making an impact.",
-  "According to charity: water, approximately 696 million people lack access to clean and safe drinking water.",
-  "According to charity: water Stories' \"The Water Crisis is a Women's Issue,\" women and girls spend an estimated 200 million hours every day collecting water worldwide."
-];
-
 const homeScreen = document.getElementById("home-screen");
 const gameScreen = document.getElementById("game-screen");
 const scoreElement = document.getElementById("score");
@@ -51,12 +39,10 @@ const storeDialog = document.getElementById("store-dialog");
 const gameOverDialog = document.getElementById("game-over-dialog");
 const gameOverScore = document.getElementById("game-over-score");
 const bestScoreElement = document.getElementById("best-score");
-const funFactElement = document.getElementById("fun-fact-text");
 const settingsDialog = document.getElementById("settings-dialog");
 const volumeControl = document.getElementById("volume-control");
 const volumeValue = document.getElementById("volume-value");
 const soundToggle = document.getElementById("sound-toggle");
-const factsToggle = document.getElementById("facts-toggle");
 const resetSettingsButton = document.getElementById("reset-settings");
 const themeControl = document.getElementById("theme-control");
 const storeBalance = document.getElementById("store-balance");
@@ -95,12 +81,9 @@ bestScoreElement.textContent = bestScore;
 volumeControl.value = Math.round(volumeLevel * 100);
 volumeValue.textContent = `${volumeControl.value}%`;
 soundToggle.checked = soundEnabled;
-factsToggle.checked = factsVisible;
 if (!validThemes.includes(theme)) theme = "sunny";
 themeControl.value = theme;
 document.body.classList.add(`theme-${theme}`);
-document.body.classList.toggle("facts-hidden", !factsVisible);
-showRandomFunFact();
 applyStoreCosmetics();
 renderStore();
 startBackgroundMusic();
@@ -175,27 +158,18 @@ soundToggle.addEventListener("change", () => {
     stopBackgroundMusic();
   }
 });
-factsToggle.addEventListener("change", () => {
-  factsVisible = factsToggle.checked;
-  document.body.classList.toggle("facts-hidden", !factsVisible);
-  localStorage.setItem("factsVisible", factsVisible);
-});
 resetSettingsButton.addEventListener("click", () => {
   volumeLevel = 0.7;
   soundEnabled = true;
-  factsVisible = true;
   volumeControl.value = 70;
   volumeValue.textContent = "70%";
   soundToggle.checked = true;
-  factsToggle.checked = true;
   theme = "sunny";
   themeControl.value = theme;
   document.body.classList.remove("theme-ocean", "theme-night");
   document.body.classList.add("theme-sunny");
-  document.body.classList.remove("facts-hidden");
   localStorage.removeItem("volumeLevel");
   localStorage.removeItem("soundEnabled");
-  localStorage.removeItem("factsVisible");
   localStorage.removeItem("theme");
   startBackgroundMusic();
 });
@@ -327,7 +301,6 @@ function returnHome() {
   clearDrops();
   gameScreen.hidden = true;
   homeScreen.hidden = false;
-  showRandomFunFact();
 }
 
 function returnHomeFromStore() {
@@ -404,17 +377,6 @@ function launchConfetti() {
     document.body.appendChild(piece);
     piece.addEventListener("animationend", () => piece.remove());
   }
-}
-
-function showRandomFunFact() {
-  let nextFunFactIndex;
-
-  do {
-    nextFunFactIndex = Math.floor(Math.random() * funFacts.length);
-  } while (funFacts.length > 1 && nextFunFactIndex === lastFunFactIndex);
-
-  lastFunFactIndex = nextFunFactIndex;
-  funFactElement.textContent = funFacts[nextFunFactIndex];
 }
 
 function createDrop() {
