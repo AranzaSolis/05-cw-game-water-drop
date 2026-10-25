@@ -502,6 +502,7 @@ main {
 
 .store-item {
     flex: 0 0 calc((100% - 16px) / 3);
+    min-width: 104px;
     display: grid;
     gap: 0;
     padding: 9px;
@@ -1002,7 +1003,7 @@ body.facts-hidden .fun-fact {
 }
 
 .store-preview.bucket-jerry {
-    background: var(--sky-light) url("img/water-can-transparent.png") center / 115% 115% no-repeat;
+    background: var(--sky-light) url("img/water-can-transparent.png") center / auto 115% no-repeat;
     min-height: 82px;
     font-size: 0;
 }
