@@ -1413,3 +1413,21 @@ button {
 body.theme-night button {
     border-color: #000000;
 }
+
+/*cursor*/
+html,
+body,
+.home-screen,
+.home-screen * {
+    cursor: default !important;
+}
+
+.home-screen button,
+.home-screen a {
+    cursor: pointer !important;
+}
+
+#game-container,
+#game-container * {
+    cursor: none;
+}
